@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class MyAnimalShop implements AnimalShop
 {
     double money;
-    ArrayList<Animal> l1=new ArrayList<>();
-    ArrayList<Customer> Cs=new ArrayList<>();
+    ArrayList<Animal> listAnimal=new ArrayList<>();
+    ArrayList<Customer> listCustomer=new ArrayList<>();
     double profit;
     public MyAnimalShop(double a)
     {
@@ -27,25 +27,25 @@ public class MyAnimalShop implements AnimalShop
     }
     else
         {
-            if(name.equals("ruraldog"))
+            if(name.equals("RuralDog"))
             {
 
-                Animal e=new ruraldog(age,sex,true);
-                l1.add(e);
+                Animal e=new RuralDog(age,sex,true);
+                listAnimal.add(e);
                 money-=price;
                 profit-=price;
             }
-            else if(name.equals("cat"))
+            else if(name.equals("Cat"))
             {
 
-                Animal e=new cat(age,sex);
-                l1.add(e);money-=price;
+                Animal e=new Cat(age,sex);
+                listAnimal.add(e);money-=price;
                 profit-=price;
             }
-            else if(name.equals("pig"))
+            else if(name.equals("Pig"))
             {
-                Animal e=new pig(age,sex);
-                l1.add(e);money-=price;
+                Animal e=new Pig(age,sex);
+                listAnimal.add(e);money-=price;
                 profit-=price;
 
             }
@@ -54,23 +54,23 @@ public class MyAnimalShop implements AnimalShop
     }
 
     @Override
-    public void treatCustomer(Customer cs1,Animal e1) {
-        Cs.add(cs1);
+    public void treatCustomer(Customer customer,Animal animal) {
+        listCustomer.add(customer);
         int sale=0;//0为未出售成功，1为出售成功；
-        for (int i = 0; i < l1.size(); i++) {
-            if(l1.get(i).name.equals(e1.name)&&l1.get(i).age==e1.age&&l1.get(i).sex==e1.sex)
+        for (int i = 0; i < listAnimal.size(); i++) {
+            if(listAnimal.get(i).name.equals(animal.name)&&listAnimal.get(i).age==animal.age&&listAnimal.get(i).sex==animal.sex)
             {
                 sale=1;
-                l1.remove(i);
+                listAnimal.remove(i);
                 System.out.println("出售成功！");
-                profit+=e1.price;
+                profit+=animal.price;
             }
         }
         try
         {
             if(sale==0)
             {
-             throw new AnimalNotFountException(e1);
+             throw new AnimalNotFountException(animal);
             }
         }catch(AnimalNotFountException k)
             {
@@ -79,14 +79,14 @@ public class MyAnimalShop implements AnimalShop
     }
 
     @Override
-    public  boolean outBusiness(Customer e) {
-        if(e.l1.hour>22||e.l1.hour<8)
+    public  boolean outBusiness(Customer customer) {
+        if(customer.l1.hour>22||customer.l1.hour<8)
         {
             System.out.println("歇业");
-            System.out.println("今日招待人数为:"+Cs.size());
-            for(int i=0;i<Cs.size();i++)
+            System.out.println("今日招待人数为:"+listCustomer.size());
+            for(int i=0;i<listCustomer.size();i++)
             {
-                System.out.println(Cs.get(i).toString());
+                System.out.println(listCustomer.get(i).toString());
             }
             System.out.println("今天利润为："+profit);
             return true;

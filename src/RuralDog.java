@@ -1,6 +1,6 @@
-public class ruraldog extends Animal{
+public class RuralDog extends Animal{
     public boolean isVaccinelnjected;
-    public ruraldog(int age1,char sex1,boolean isVaccinelnjected1)
+    public RuralDog(int age1, char sex1, boolean isVaccinelnjected1)
     {
         name="ruraldog";
         age=age1;
